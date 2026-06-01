@@ -43,6 +43,11 @@ REPORT_DIR = r"C:\tenable_tracker\reports"
 NUM_OF_DAYS = 7
 SLA_WEEKS = 6
 
+# Tenable.io API connection parameters
+# IMPORTANT: replace these placeholders with your actual Tenable access/secret keys.
+accessKey = "YOUR_ACCESS_KEY"
+secretKey = "YOUR_SECRET_KEY"
+
 TAGS = [
     {"category": "Tower", "tag": "Intel Server"},
     {"category": "Tower", "tag": "Linux"},
@@ -1330,13 +1335,8 @@ def main():
     print("=" * 60)
 
     # ── Get API keys ──
-    access_key = os.environ.get("TENABLE_ACCESS_KEY", "")
-    secret_key = os.environ.get("TENABLE_SECRET_KEY", "")
-
-    if not access_key or not secret_key:
-        print("\nPaste your Tenable.io API keys (or set TENABLE_ACCESS_KEY / TENABLE_SECRET_KEY env vars):")
-        access_key = input("  Access Key: ").strip()
-        secret_key = input("  Secret Key: ").strip()
+    access_key = accessKey
+    secret_key = secretKey
 
     if not access_key or not secret_key:
         print("\n[WARN] No API keys provided. Attempting to load from existing Excel...")
