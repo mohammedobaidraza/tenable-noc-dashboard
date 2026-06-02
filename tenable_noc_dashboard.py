@@ -38,7 +38,7 @@ from openpyxl.styles.borders import Border
 # CONFIGURATION
 # ═══════════════════════════════════════════════════════════
 
-EXCEL_PATH = r"C:\tenable_tracker\Weekly VM Remediation Tracker.xlsx"
+EXCEL_PATH = r"C:\tenable_tracker\Tenable_NOC_Tracker.xlsx"
 REPORT_DIR = r"C:\tenable_tracker\reports"
 NUM_OF_DAYS = 7
 SLA_WEEKS = 6
@@ -244,7 +244,7 @@ def plugins_to_dataframe(plugins, tower_name=""):
         })
     df = pd.DataFrame(rows)
     if not df.empty:
-        df["SLA Threshold"] = df["Severity"].map(SLA_THRESHOLDS)
+        df["SLA Threshold"] = df["Severity"].apply(lambda x: SLA_THRESHOLDS.get(str(x), 9999))
         df["SLA State"] = np.where(df["Age (Days)"] > df["SLA Threshold"], "Past SLA", "Within SLA")
     return df
 
@@ -425,7 +425,7 @@ def load_excel_to_dataframes(excel_path):
         df["Tower"] = sheet_name
 
         if "SLA State" not in df.columns:
-            df["SLA Threshold"] = df["Severity"].map(SLA_THRESHOLDS).fillna(9999)
+            df["SLA Threshold"] = df["Severity"].apply(lambda x: SLA_THRESHOLDS.get(str(x), 9999))
             df["SLA State"] = np.where(df["Age (Days)"] > df["SLA Threshold"], "Past SLA", "Within SLA")
 
         tag_dfs[sheet_name] = df
