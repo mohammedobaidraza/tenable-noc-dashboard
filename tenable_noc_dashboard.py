@@ -38,7 +38,7 @@ from openpyxl.styles.borders import Border
 # CONFIGURATION
 # ═══════════════════════════════════════════════════════════
 
-EXCEL_PATH = r"C:\tenable_tracker\Tenable_NOC_Tracker.xlsx"
+EXCEL_PATH = r"C:\tenable_tracker\Weekly VM Remediation Dashboard.xlsx"
 REPORT_DIR = r"C:\tenable_tracker\reports"
 NUM_OF_DAYS = 7
 SLA_WEEKS = 6
